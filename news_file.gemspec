@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'news_file'
-  s.version = '0.0.2'
+  s.version = '0.0.3'
   s.license = 'MIT'
   
   s.homepage = 'https://github.com/aj0strow/news_file'

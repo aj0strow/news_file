@@ -31,6 +31,7 @@ class NewsFileTest < Minitest::Test
     assert_match /^Epcylon/, article.title
     assert_equal Date.new(2014, 5, 1), article.date
     assert_equal 'Toronto, Ontario', article.location
+    assert_equal Encoding::UTF_8, article.html.encoding
   end
 
   def test_iterate_articles

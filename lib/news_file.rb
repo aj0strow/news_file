@@ -39,13 +39,14 @@ module NewsFile
       id = url[ /release\/(\d+)/, 1 ]
       date = paragraphs.first.text[ /[[:alpha:]]+\s\d{1,2},\s\d{4}/, 0 ]
       location = paragraphs.first.text[ /\A[^-]+/, 0 ]
+      html = paragraphs.map(&:to_s).join('')
       new(
         id: id,
         url: url,
         title: content.css('h2').text,
         date: Date.parse(date),
         location: location,
-        html: paragraphs.map(&:to_s).join('')
+        html: html.encode!('UTF-8')
       )
     end
   end
