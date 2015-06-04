@@ -20,7 +20,7 @@ class NewsFileTest < Minitest::Test
 
   def test_iterate_links
     prev_requests = company.requests
-    links = company.links.take(3)
+    links = company.links.first(3)
     assert_equal 1, company.requests - prev_requests
     assert_equal 3, links.length
   end
@@ -33,9 +33,9 @@ class NewsFileTest < Minitest::Test
     assert_equal 'Toronto, Ontario', article.location
   end
 
-  def test_interate_articles
+  def test_iterate_articles
     prev_requests = company.requests
-    articles = company.articles.take(1)
+    articles = company.articles.first(1)
     assert_equal 2, company.requests - prev_requests
     assert_equal 1, articles.length
   end

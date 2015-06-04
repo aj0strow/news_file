@@ -59,12 +59,8 @@ module NewsFile
     end
 
     def articles
-      Enumerator.new do |enum|
-        links.each do |link|
-          article = Article.fetch_and_parse(link).tap { @requests += 1 }
-          enum.yield article
-        end
-        raise StopIteration
+      links.lazy.map do |link|
+        Article.fetch_and_parse(link).tap { @requests += 1 }
       end
     end
 
