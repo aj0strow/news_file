@@ -30,6 +30,14 @@ end
 
 ### Install
 
-Coming soon.
+```ruby
+# Gemfile
+
+gem 'news_file', github: 'aj0strow/news_file', tag: 'v0.0.1'
+```
+
+```
+$ bundle install
+```
 
 **MIT License**
