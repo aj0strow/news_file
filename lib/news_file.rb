@@ -59,8 +59,13 @@ module NewsFile
     end
 
     def articles
-      links.lazy.map do |link|
-        Article.fetch_and_parse(link).tap { @requests += 1 }
+      links_enum = links
+      Enumerator.new do |enum|
+        loop do
+          article = Article.fetch_and_parse(links_enum.next)
+          @requests += 1
+          enum.yield article
+        end
       end
     end
 
@@ -68,7 +73,8 @@ module NewsFile
       page = 1
       Enumerator.new do |enum|
         loop do
-          links = fetch_and_parse_links(page: page).tap { @requests += 1 }
+          links = fetch_and_parse_links(page: page)
+          @requests += 1
           links.each { |link| enum.yield link }
           raise StopIteration if links.length < 10
           page += 1

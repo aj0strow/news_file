@@ -39,4 +39,9 @@ class NewsFileTest < Minitest::Test
     assert_equal 2, company.requests - prev_requests
     assert_equal 1, articles.length
   end
+
+  def test_iterate_all
+    company.links.count
+    company.articles.count
+  end
 end
