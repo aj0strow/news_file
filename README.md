@@ -18,7 +18,7 @@ You can page through links.
 
 ```ruby
 company.links.take(12)
-``
+```
 
 You can page through articles.
 
