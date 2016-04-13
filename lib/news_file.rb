@@ -32,7 +32,12 @@ module NewsFile
       url = "#{ BASE_URL }#{ url }" if url.start_with?('/')
       doc = Nokogiri::HTML(open(url))
       content = doc.css('.NewsReleaseDetailsContent')
-
+      
+      headings = %w(h1 h2 h3).map do |selector|
+        content.css(selector).text
+      end
+      title = headings.find{ |text| !text.empty? }
+      
       # replace old tags with modern equiv
       content.css('b').each { |b| b.name = 'strong' }
       paragraphs = content.css('p')[1..-1]
@@ -43,7 +48,7 @@ module NewsFile
       new(
         id: id,
         url: url,
-        title: content.css('h2').text,
+        title: title,
         date: Date.parse(date),
         location: location,
         html: html.encode!('UTF-8')
